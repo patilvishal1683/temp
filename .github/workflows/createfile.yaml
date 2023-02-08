@@ -1,5 +1,5 @@
 name: pythonfile
-on: [push, workflow_dispatc]
+on: [workflow_dispatch]
 jobs:
   runs-on: ubuntu-latest
   steps:
