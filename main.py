@@ -4,13 +4,13 @@ import sys
 WARNING_MISMATCH = []
 PARAMETER_MISMATCH = []
 # Read Values File and convert it into Dict Data Structure 
-file_name = sys.argv[1]
+file_name = "f1.yaml"
 # file_path = f"./rc/charts/system1-enterprise/{file_name}"
 with open(file_name, 'r') as file:
     # AWS File Converted into Dict
     MAIN_FILE_YML_DICT = yaml.safe_load(file)
 
-values_file_path = sys.argv[2]
+values_file_path = "f2.yaml"
 with open(values_file_path, 'r') as file:
     # Values File Converted Into Dict
     COMPAIR_FILE_DICT = yaml.safe_load(file)
@@ -99,4 +99,5 @@ for _KEY in MAIN_FILE:
 #         print(val)
 if len(PARAMETER_MISMATCH) > 0:
     # raise Exception(f"Values Are Missing {PARAMETER_MISMATCH}")
-    print("keys are missing {}".format(PARAMETER_MISMATCH))
+    with open('output.txt', 'w') as f:
+        f.write(f"keys are missing{PARAMETER_MISMATCH}")
