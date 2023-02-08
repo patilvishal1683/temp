@@ -1,12 +1,13 @@
 name: pythonfile
 on: [workflow_dispatch]
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - name: InstallPython
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
-    - name: cloneCode
-      uses: actions/checkout@v2
-      run: python3 main.py
+  InstallPython:
+    runs-on: ubuntu-latest
+    steps:
+      - name: InstallPython
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+      - name: cloneCode
+        uses: actions/checkout@v2
+        run: python3 main.py
