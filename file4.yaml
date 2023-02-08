@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: alerts-fdn-svc-aws-aws-poc-dev
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: aws-poc-dev
+    server: https://46F2AE048AAC6E32CF65B151628A55A5.gr7.us-east-1.eks.amazonaws.com
+  project: default
+  source:
+    helm:
+      parameters:
+        - name: tenantId
+          value: b7efb214-2cd7-485b-81a2-dc1176c30574
+        - name: messageServiceProvider
+          value: AmazonRabbitMQ
+        - name: messageServiceConnectionString
+          value: >-
+            amqps://s1apm-pocdev-iepuser1:%BROKER_PASSWORD%@b-6484a4db-95d2-48c6-92f2-b0d008af6b3d.mq.us-east-1.amazonaws.com:5671/pocdev-iep
+      values: |
+        redis:
+          redisHost: master.scej9eiil9a1m2t.rcuag5.use1.cache.amazonaws.com
+          enableRedisTls: true
+        postgresql:
+          postgresqlDatabase: s1ealertpocdev
+          postgresqlUsername: pocdev
+          postgresqlDatabaseHost: bakpgd29.crrjpbpnetoj.us-east-1.rds.amazonaws.com
+    path: charts/alerts-fdn-svc
+    repoURL: 'https://github.com/BentlyNevada-bh/helm-charts.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

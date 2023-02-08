@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: help-svc-s1e-qa-aws
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: aws-qa
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: help-svc
+    helm:
+      parameters:
+        - name: clientSecret
+          value: FecQn4FeArv5LjeVAE2PZ92dtlYTpmWc1dgw
+    repoURL: ghcr.io/bentlynevada-bh
+    targetRevision: 1.0.356
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
