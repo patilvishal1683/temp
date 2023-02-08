@@ -10,5 +10,7 @@ jobs:
           python-version: '3.x'
       - name: cloneCode
         uses: actions/checkout@v2
+      - name: installRequirements
+        run: python3 insatll -r requirements.txt
       - name: runcode
         run: python3 main.py
