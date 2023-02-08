@@ -11,6 +11,6 @@ jobs:
       - name: cloneCode
         uses: actions/checkout@v2
       - name: installRequirements
-        run: python3 insatll -r requirements.txt
+        run: python3 install -r requirements.txt
       - name: runcode
         run: python3 main.py
