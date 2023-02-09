@@ -17,7 +17,9 @@ jobs:
       - name: runcode
         run: python3 main.py
       - name: openFile
-        run: cat output.txt
+        run: |
+          message=$(cat output.txt)
+          echo ::warning file={name},line={line},endLine={endLine},title={title}::${message}
       - name: uploadArtifact
         uses: actions/upload-artifact@v3
         with:
