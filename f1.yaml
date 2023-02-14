@@ -3,22 +3,28 @@ kind: Application
 metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: help-svc-s1e-qa-aws
+  name: help-svc-s1e-dev-aws
   namespace: argocd
 spec:
   destination:
-    name: ''
-    namespace: aws-qa
+    name: ""
+    namespace: aws-dev
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: help-svc
     helm:
       parameters:
+        - name: autoscaling.enabled
+          value: 'true'
         - name: clientSecret
           value: FecQn4FeArv5LjeVAE2PZ92dtlYTpmWc1dgw
-    repoURL: ghcr.io/bentlynevada-bh
-    targetRevision: 1.0.356
+        - name: extraEnv
+          value: |
+            - name: TEST
+              value: "Test"
+    path: charts/help-svc
+    repoURL: https://github.com/BentlyNevada-bh/helm-charts.git
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true

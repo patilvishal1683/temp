@@ -11,15 +11,20 @@ jobs:
       - name: cloneCode
         uses: actions/checkout@v2
       - name: listFile
-        run: ls
+        id: test
+        run: |
+          ls >> $GITHUB_OUTPUT
       - name: installRequirements
-        run: pip3 install -r requirements.txt
+        run: |
+          echo ${{steps.run_tests.outputs.*)}}
+          pip3 install -r requirements.txt
+
       - name: runcode
         run: python3 main.py
       - name: openFile
         run: |
           message=$(cat output.txt)
-          echo ::warning file={name},line={line},endLine={endLine},title={title}::${message}
+          echo ::warning title={Error In file}::${message}
       - name: uploadArtifact
         uses: actions/upload-artifact@v3
         with:

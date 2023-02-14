@@ -3,22 +3,18 @@ kind: Application
 metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: help-svc-s1e-uat-aws
+  name: help-svc-az-qa
   namespace: argocd
 spec:
   destination:
     name: ''
-    namespace: aws-uat
-    server: https://46F2AE048AAC6E32CF65B151628A55A5.gr7.us-east-1.eks.amazonaws.com
+    namespace: az-qa
+    server: https://kubernetes.default.svc
   project: default
   source:
     chart: help-svc
-    helm:
-      parameters:
-        - name: autoscaling.enabled
-          value: 'false'
     repoURL: ghcr.io/bentlynevada-bh
-    targetRevision: 1.0.346
+    targetRevision: 1.0.369
   syncPolicy:
     automated:
       prune: true
