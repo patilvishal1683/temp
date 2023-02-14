@@ -15,7 +15,7 @@ jobs:
         id: test
         run: |
           output="github"
-          echo "var=hello" >> $GITHUB_OUTPUT
+          echo "var=$output" >> $GITHUB_OUTPUT
 #          echo $output >> $GITHUB_OUTPUT
 #          echo 'EOF' >> $GITHUB_OUTPUT
       - name: installRequirements
