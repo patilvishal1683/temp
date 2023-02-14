@@ -14,8 +14,9 @@ jobs:
       - name: listFile
         id: test
         run: |
+          echo 'var<<EOF' >> $GITHUB_OUTPUT
           echo "Hello" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
       - name: installRequirements
         run: |
           echo ${{steps.test.outputs.*}}
