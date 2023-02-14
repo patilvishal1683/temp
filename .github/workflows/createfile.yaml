@@ -14,7 +14,7 @@ jobs:
       - name: listFile
         id: test
         run: |
-          echo "hello" >> $GITHUB_OUTPUT
+          echo "mix-test=$(mix test)\n" >> $GITHUB_OUTPUT
       - name: installRequirements
         run: |
           echo ${{steps.run_tests.outputs.*}}
