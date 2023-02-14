@@ -19,7 +19,7 @@ jobs:
           echo 'EOF' >> $GITHUB_OUTPUT
       - name: installRequirements
         run: |
-          echo ${{steps.test.outputs.*}}
+          echo ${{steps.test.outputs.var}}
           pip3 install -r requirements.txt
 
       - name: runcode
