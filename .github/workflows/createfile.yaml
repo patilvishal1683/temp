@@ -14,10 +14,10 @@ jobs:
       - name: listFile
         id: test
         run: |
-          echo "mix-test=$(mix test)\n" >> $GITHUB_OUTPUT
+          echo "mix-test=$(mix test)\n" >> "${GITHUB_OUTPUT}"
       - name: installRequirements
         run: |
-          echo ${{steps.run_tests.outputs.*}}
+          echo ${{steps.test.outputs.*}}
           pip3 install -r requirements.txt
 
       - name: runcode
