@@ -15,12 +15,13 @@ jobs:
         id: test
         run: |
           output="github"
-          echo "var=$output, va2=ola" >> $GITHUB_OUTPUT
+          echo "var=$output" >> $GITHUB_OUTPUT
+          echo "var2=foo" >> $GITHUB_OUTPUT
 #          echo $output >> $GITHUB_OUTPUT
 #          echo 'EOF' >> $GITHUB_OUTPUT
       - name: installRequirements
         run: |
-          echo ${{steps.test.outputs.va2}}
+          echo ${{steps.test.outputs.var2}}
           pip3 install -r requirements.txt
 
       - name: runcode
