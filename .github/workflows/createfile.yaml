@@ -10,10 +10,11 @@ jobs:
           python-version: '3.x'
       - name: cloneCode
         uses: actions/checkout@v2
+
       - name: listFile
         id: test
         run: |
-          ls >> $GITHUB_OUTPUT
+          echo "hello" >> $GITHUB_OUTPUT
       - name: installRequirements
         run: |
           echo ${{steps.run_tests.outputs.*}}
