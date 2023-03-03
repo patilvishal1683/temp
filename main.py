@@ -1,9 +1,10 @@
 import yaml
 import sys
 
-PARAMETER_NOT_PRESENT = []
-PARAMETER_NOT_PRESENT_COMPAIR = []
+WARNING_MISMATCH = []
 PARAMETER_MISMATCH = []
+PARAMETER_NOT_PRESENT_COMPAIR = []
+SKIP_KEYS = ["autoscaling.enabled", "extraEnv", "environment"]
 # Read Values File and convert it into Dict Data Structure
 file_name = "f1.yaml"
 # file_path = f"./rc/charts/system1-enterprise/{file_name}"
@@ -19,14 +20,11 @@ with open(values_file_path, 'r') as file:
 
 # FUNCTION TO CHECK VALUES FROM BOTH FILES
 def check_parameters(file_1_values, file_2_values) -> None:
-    # print("Hello")
     try:
         file1_key = [param['name'] for param in file_1_values]
         file2_key = [param['name'] for param in file_2_values]
-        # print(file1_key)
-        # print(file2_key)
         for f1_key in file1_key:
-            if f1_key == "autoscaling.enabled" or f1_key == "extraEnv":
+            if f1_key in SKIP_KEYS:
                 continue
             if f1_key not in file2_key:
                 PARAMETER_MISMATCH.append(f1_key)
@@ -40,13 +38,10 @@ def check_inside_values(**kwargs):
     try:
         # GET KEYS OF FROM BOTH FILES
         MIAN_FILE_KEYS = list(kwargs['val_1'].keys())
-        # print(MIAN_FILE_KEYS)
         COMPAIR_FILE_KEYS = list(kwargs['val_2'].keys())
-        # print(COMPAIR_FILE_KEYS)
 
         # LOOP TO CHECK IF KEYS ARE PRESENT
         for key in MIAN_FILE_KEYS:
-            # print(key)
             if key in COMPAIR_FILE_KEYS:
 
                 # VARIABLES : STORES KEY FROM BOTH FILES
@@ -59,10 +54,9 @@ def check_inside_values(**kwargs):
 
                 # FURTHURE CHECK IF KEY VALUE PAIR IS OF TYPE LIST IF YES THEN RECURSIVE FUNCTION CALL
                 elif isinstance(SOURCE_FILE, list) and isinstance(COMPAIR_FILE_KEY_CHECK, list):
-                    # print("hello")
+
                     # CHECK EACH VALUE IN PARAMETERS
                     if key == "parameters":
-                        # print("hello")
                         check_parameters(file_1_values=SOURCE_FILE, file_2_values=COMPAIR_FILE_KEY_CHECK)
 
                     # FURTHURE CHECK IF KEY VALUE PAIR IN LIST
@@ -81,9 +75,6 @@ def check_inside_values(**kwargs):
                             continue
                         else:
                             PARAMETER_NOT_PRESENT_COMPAIR.append(val.get('name'))
-                    # print(kwargs['val_1'][key])
-                # if {key: kwargs['val_1'][key]} not in WARNING_MISMATCH:
-                #     WARNING_MISMATCH.append({key: kwargs['val_1'][key]})
     except Exception as e:
         # print(e)
         pass
@@ -95,7 +86,6 @@ START OF THE PROGRAM
 MAIN_FILE = MAIN_FILE_YML_DICT.keys()
 FILE_TO_COMPAIR_WITH = COMPAIR_FILE_DICT.keys()
 for _KEY in MAIN_FILE:
-    # print(_KEY)
     try:
         # KEYS_EMPTY_IN_VALUES
         if _KEY in FILE_TO_COMPAIR_WITH:
@@ -107,10 +97,10 @@ for _KEY in MAIN_FILE:
                 for val1, val2 in zip(MAIN_FILE_YML_DICT[_KEY], COMPAIR_FILE_DICT[_KEY]):
                     check_inside_values(val_1=val1, val_2=val2)
         else:
-            if {_KEY: MAIN_FILE_YML_DICT[_KEY]} in PARAMETER_NOT_PRESENT:
+            if {_KEY: MAIN_FILE_YML_DICT[_KEY]} in WARNING_MISMATCH:
                 pass
             else:
-                PARAMETER_NOT_PRESENT.append({_KEY: MAIN_FILE_YML_DICT[_KEY]})
+                WARNING_MISMATCH.append({_KEY: MAIN_FILE_YML_DICT[_KEY]})
     except Exception as e:
         continue
 
@@ -120,6 +110,7 @@ for _KEY in MAIN_FILE:
 #     print("Below are the Values which are missing when compared file")
 #     for val in WARNING_MISMATCH:
 #         print(val)
-if len(PARAMETER_MISMATCH) > 0 or len(PARAMETER_NOT_PRESENT_COMPAIR) > 0:
-
-    print("\nMissing Keys {} {}".format(PARAMETER_MISMATCH, PARAMETER_NOT_PRESENT_COMPAIR))
+if len(PARAMETER_NOT_PRESENT_COMPAIR) > 0:
+    print("\nMissing Entire Parameters parameters:{}".format(PARAMETER_NOT_PRESENT_COMPAIR))
+if len(PARAMETER_MISMATCH) > 0:
+    print("\nMissing Keys {}".format(PARAMETER_MISMATCH))
