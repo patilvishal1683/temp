@@ -13,7 +13,7 @@ jobs:
       - name: python as script
         run: |
           #!/usr/bin/env python3
-          pritn("Hello")
+          print("Hello")
 #       - name: listFile
 #         id: test
 #         run: |
