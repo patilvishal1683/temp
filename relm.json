@@ -1,0 +1,16 @@
+{
+  "rootKeycloakUser": "admin",
+  "rootKeycloakUserPass": "Test@123",
+  "tenantAdminUsername": "test",
+  "tenantAdminPassword": "Test@123",
+  "tenantId": "5f6530f9-636b-433a-83ce-ac3024fdead1",
+  "realm": {
+    "id": "5f6530f9-636b-433a-83ce-ac3024fdead1",
+    "realm": "S1E-1L",
+    "displayName": "EI",
+    "enabled": true,
+    "attributes": {
+      "client_credentials.use_refresh_token": "false"
+    }
+  }
+}
