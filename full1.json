@@ -152,7 +152,7 @@
         },
         {
           "authenticator": "idp-auto-link"
-        
+        }
       ]
     },
     {
@@ -164,9 +164,9 @@
       "authenticationExecutions": [
         {
           "authenticator": "allow-access-authenticator"
-        
+        }
       ]
-    
+    }
   ],
   "identityProviders": [],
   "identityProviderMappers": [],
@@ -185,7 +185,7 @@
         },
         {
           "name": "test2"
-        
+        }
       ]
     },
     {
@@ -226,7 +226,7 @@
       "realmRoles": ["basic"],
       "clientRoles": {},
       "subGroups": []
-    
+    }
   ],
   "roles": [
     {
@@ -380,7 +380,7 @@
     {
       "name": "sa_app_asset",
       "description": "Regular user with $i set of permissions text"
-    
+    }
   ],
   "clients": {
     "UIClients": [
@@ -448,9 +448,9 @@
                       "s1ei-ui-hierarchyModes-app",
                       "statusApp"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -468,13 +468,13 @@
                       "statusApp",
                       "userMgmt"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ]
-      
+      }
     ],
     "SAClients": [
       {
@@ -616,7 +616,7 @@
           "client_credentials.use_refresh_token": "false"
         },
         "scopes": []
-      
+      }
     ],
     "SAClientsWithAuthorization": [
       {
@@ -630,9 +630,9 @@
                   {
                     "name": "app-alerts-fdn-svc-basic-permission",
                     "scope": ["alerts-read", "alerts-update", "alerts-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -650,9 +650,9 @@
                       "alerts-management-onboard",
                       "alerts-create"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -670,9 +670,9 @@
                       "alerts-management-onboard",
                       "alerts-create"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -684,9 +684,9 @@
                   {
                     "name": "app-alerts-fdn-svc-sa_app_kpi_compute_svc-permission",
                     "scope": ["alerts-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -698,9 +698,9 @@
                   {
                     "name": "app-alerts-fdn-svc-sa_app_analytics_connector_svc-permission",
                     "scope": ["alerts-update", "alerts-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -712,9 +712,9 @@
                   {
                     "name": "app-alerts-fdn-svc-sa_app_augury_connector_svc-permission",
                     "scope": ["alerts-read", "alerts-update", "alerts-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -731,9 +731,9 @@
                       "alerts-create",
                       "alerts-management-onboard"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -745,9 +745,9 @@
                   {
                     "name": "app-alerts-fdn-svc-sa_app_events_svc-permission",
                     "scope": ["alerts-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -759,11 +759,11 @@
                   {
                     "name": "app-alerts-fdn-svc-sa_app_failure_mode_svc-permission",
                     "scope": ["alerts-update"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-alerts-fdn-svc",
         "attributes": {
@@ -789,9 +789,9 @@
                   {
                     "name": "app-analytics-onboarding-svc-basic-permission",
                     "scope": ["onboarding-manage"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -803,11 +803,11 @@
                   {
                     "name": "app-analytics-onboarding-svc-administrator-permission",
                     "scope": ["onboarding-manage"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-analytics-onboarding-svc",
         "secret": "/CLIENT_SECRET/APP_ANALYTICS_ONBOARDING_SVC",
@@ -827,9 +827,9 @@
                   {
                     "name": "app-dashboard-svc-sa_app_dashboard_app-permission",
                     "scope": ["dashboard-configurations-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -841,9 +841,9 @@
                   {
                     "name": "app-dashboard-svc-basic-permission",
                     "scope": ["dashboard-configurations-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -855,11 +855,11 @@
                   {
                     "name": "app-dashboard-svc-administrator-permission",
                     "scope": ["dashboard-configurations-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-dashboard-svc",
         "secret": "/CLIENT_SECRET/APP_DASHBOARD_SVC",
@@ -889,9 +889,9 @@
                   {
                     "name": "app-kpi-svc-basic-permission",
                     "scope": ["kpi-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -903,9 +903,9 @@
                   {
                     "name": "app-kpi-svc-administrator-permission",
                     "scope": ["kpi-read", "kpi-create", "kpi-meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -917,9 +917,9 @@
                   {
                     "name": "app-kpi-svc-sa_app_kpi_worker_svc-permission",
                     "scope": ["kpi-read", "kpi-create", "kpi-meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -931,9 +931,9 @@
                   {
                     "name": "app-kpi-svc-sa_app_notification_mgmt_svc-permission",
                     "scope": ["kpi-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -945,11 +945,11 @@
                   {
                     "name": "app-kpi-svc-sa_app_case_svc-permission",
                     "scope": ["kpi-read", "kpi-create", "kpi-meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ]
       },
       {
@@ -971,9 +971,9 @@
                       "assets-reset",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -992,9 +992,9 @@
                       "assets-read",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1006,9 +1006,9 @@
                   {
                     "name": "app-asset-fdn-svc-basic-permission",
                     "scope": ["assets-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1020,9 +1020,9 @@
                   {
                     "name": "app-asset-fdn-svc-sa_app_kpi_compute_svc-permission",
                     "scope": ["assets-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1034,9 +1034,9 @@
                   {
                     "name": "app-asset-fdn-svc-sa_app_analytics_connector_svc-permission",
                     "scope": ["assets-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1055,9 +1055,9 @@
                       "assets-read",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1076,9 +1076,9 @@
                       "assets-read",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1097,9 +1097,9 @@
                       "assets-read",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1111,9 +1111,9 @@
                   {
                     "name": "app-asset-fdn-svc-sa_app_hierarchy_modes_app-permission",
                     "scope": ["assets-create", "assets-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1125,9 +1125,9 @@
                   {
                     "name": "app-asset-fdn-svc-sa_app_kpi_worker_svc-permission",
                     "scope": ["assets-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1146,9 +1146,9 @@
                       "assets-read",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1167,9 +1167,9 @@
                       "assets-read",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1188,11 +1188,11 @@
                       "assets-read",
                       "assets-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-asset-fdn-svc",
         "attributes": {
@@ -1220,11 +1220,11 @@
                   {
                     "name": "app-fleet-config-ingestor-svc-administrator-permission",
                     "scope": ["config-ingestor-delete-cache"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-fleet-config-ingestor-svc",
         "scopes": ["config-ingestor-delete-cache"],
@@ -1244,11 +1244,11 @@
                   {
                     "name": "app-fleet-event-ingestor-svc-administrator-permission",
                     "scope": ["event-ingestor-delete-cache"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-fleet-event-ingestor-svc",
         "realmRoles": ["sa_app_fleet_event_ingestor_svc"],
@@ -1269,9 +1269,9 @@
                   {
                     "name": "app-fleet-meta-search-svc-basic-permission",
                     "scope": ["meta-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1283,9 +1283,9 @@
                   {
                     "name": "app-fleet-meta-search-svc-administrator-permission",
                     "scope": ["meta-read", "meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1297,9 +1297,9 @@
                   {
                     "name": "app-fleet-meta-search-svc-sa_app_kpi_compute_svc-permission",
                     "scope": ["meta-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1311,9 +1311,9 @@
                   {
                     "name": "app-fleet-meta-search-svc-sa_app_analytics_connector_svc-permission",
                     "scope": ["meta-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1330,9 +1330,9 @@
                       "meta-delete",
                       "meta-create"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1344,9 +1344,9 @@
                   {
                     "name": "app-fleet-meta-search-svc-sa_app_hierarchy_modes_app-permission",
                     "scope": ["meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1358,9 +1358,9 @@
                   {
                     "name": "app-fleet-meta-search-svc-sa_app_kpi_worker_svc-permission",
                     "scope": ["meta-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1372,9 +1372,9 @@
                   {
                     "name": "app-fleet-meta-search-svc-sa_app_events_svc-permission",
                     "scope": ["meta-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1386,11 +1386,11 @@
                   {
                     "name": "app-fleet-meta-search-svc-sa_app_case_svc-permission",
                     "scope": ["meta-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-fleet-meta-search-svc",
         "realmRoles": ["sa_app_fleet_meta_search_svc"],
@@ -1411,11 +1411,11 @@
                   {
                     "name": "app-kpi-compute-svc-administrator-permission",
                     "scope": ["kpis-reset"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-kpi-compute-svc",
         "realmRoles": ["sa_app_kpi_compute_svc"],
@@ -1436,9 +1436,9 @@
                   {
                     "name": "app-kpi-svc-basic-permission",
                     "scope": ["kpi-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1450,9 +1450,9 @@
                   {
                     "name": "app-kpi-svc-administrator-permission",
                     "scope": ["kpi-read", "kpi-create", "kpi-meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1464,9 +1464,9 @@
                   {
                     "name": "app-kpi-svc-sa_app_kpi_worker_svc-permission",
                     "scope": ["kpi-read", "kpi-create", "kpi-meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1478,9 +1478,9 @@
                   {
                     "name": "app-kpi-svc-sa_app_notification_mgmt_svc-permission",
                     "scope": ["kpi-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1492,11 +1492,11 @@
                   {
                     "name": "app-kpi-svc-sa_app_case_svc-permission",
                     "scope": ["kpi-read", "kpi-create", "kpi-meta-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-kpi-svc",
         "scopes": ["kpi-read", "kpi-meta-create", "kpi-create"],
@@ -1516,9 +1516,9 @@
                   {
                     "name": "app-usrmgmt-fdn-svc-basic-permission",
                     "scope": ["read-groups", "read-users"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1530,9 +1530,9 @@
                   {
                     "name": "app-usrmgmt-fdn-svc-administrator-permission",
                     "scope": ["read-groups", "read-users", "modify-groups-bulk"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1544,9 +1544,9 @@
                   {
                     "name": "app-usrmgmt-fdn-svc-sa_app_case_mgmt_fdn_svc-permission",
                     "scope": ["read-groups", "read-users"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1558,11 +1558,11 @@
                   {
                     "name": "app-usrmgmt-fdn-svc-sa_app_case_svc-permission",
                     "scope": ["read-groups", "read-users"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-usrmgmt-fdn-svc",
         "realmRoles": ["sa_app_user_mgmt_fdn_svc"],
@@ -1583,9 +1583,9 @@
                   {
                     "name": "app-accs-fdn-svc-basic-permission",
                     "scope": ["read-roles"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1597,11 +1597,11 @@
                   {
                     "name": "app-accs-fdn-svc-administrator-permission",
                     "scope": ["read-roles", "filter-attributes"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-accs-fdn-svc",
         "scopes": ["filter-attributes", "read-roles"],
@@ -1622,9 +1622,9 @@
                   {
                     "name": "app-events-svc-basic-permission",
                     "scope": ["alarms-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1636,11 +1636,11 @@
                   {
                     "name": "app-events-svc-administrator-permission",
                     "scope": ["alarms-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-events-svc",
         "attributes": {
@@ -1660,9 +1660,9 @@
                   {
                     "name": "app-timeseries-fdn-svc-sa_app_kpi_compute_svc-permission",
                     "scope": ["timeseries-query", "timeseries-write"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1674,9 +1674,9 @@
                   {
                     "name": "app-timeseries-fdn-svc-basic-permission",
                     "scope": ["timeseries-query"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1692,9 +1692,9 @@
                       "timeseries-query",
                       "timeseries-write"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1706,9 +1706,9 @@
                   {
                     "name": "app-timeseries-fdn-svc-sa_app_analytics_connector_svc-permission",
                     "scope": ["timeseries-query", "timeseries-write"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1720,9 +1720,9 @@
                   {
                     "name": "app-timeseries-fdn-svc-sa_app_hierarchy_modes_app-permission",
                     "scope": ["timeseries-write"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1734,9 +1734,9 @@
                   {
                     "name": "app-timeseries-fdn-svc-sa_app_bluefin_connector_svc-permission",
                     "scope": ["timeseries-query", "timeseries-write"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1748,11 +1748,11 @@
                   {
                     "name": "app-timeseries-fdn-svc-sa_app_rangerpro_connector_svc-permission",
                     "scope": ["timeseries-query", "timeseries-write"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-timeseries-fdn-svc",
         "scopes": [
@@ -1780,9 +1780,9 @@
                       "augury-connector-sync",
                       "augury-connector-read"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1804,9 +1804,9 @@
                       "augury-connector-forcesync",
                       "augury-connector-delete-logs"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1822,9 +1822,9 @@
                       "augury-connector-read",
                       "augury-connector-delete-logs"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1836,11 +1836,11 @@
                   {
                     "name": "app-augury-connector-svc-sa_app_analytics_orchestrator_svc-permission",
                     "scope": ["augury-connector-write"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-augury-connector-svc",
         "realmRoles": ["sa_app_augury_connector_svc"],
@@ -1871,9 +1871,9 @@
                   {
                     "name": "app-case-alerts-fdn-svc-basic-permission",
                     "scope": ["alerts-update", "alerts-create", "alerts-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1891,9 +1891,9 @@
                       "alerts-read",
                       "alerts-management-onboard"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1911,9 +1911,9 @@
                       "alerts-read",
                       "alerts-management-onboard"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1931,9 +1931,9 @@
                       "alerts-read",
                       "alerts-management-onboard"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -1951,11 +1951,11 @@
                       "alerts-read",
                       "alerts-management-onboard"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-case-alerts-fdn-svc",
         "attributes": {
@@ -1992,9 +1992,9 @@
                       "read-case",
                       "delete-case-attachments"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2019,9 +2019,9 @@
                       "read-case",
                       "delete-case-attachments"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2037,9 +2037,9 @@
                       "read-case",
                       "delete-case-attachments"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2064,11 +2064,11 @@
                       "read-case",
                       "delete-case-attachments"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-case-mgmt-fdn-svc",
         "attributes": {
@@ -2102,9 +2102,9 @@
                   {
                     "name": "app-license-svc-basic-permission",
                     "scope": ["license-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2121,9 +2121,9 @@
                       "license-return",
                       "license-activate"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2139,11 +2139,11 @@
                       "license-return",
                       "license-activate"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-license-svc",
         "attributes": {
@@ -2168,9 +2168,9 @@
                   {
                     "name": "app-units-svc-basic-permission",
                     "scope": ["units-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2182,9 +2182,9 @@
                   {
                     "name": "app-units-svc-administrator-permission",
                     "scope": ["units-read", "units-reset"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2196,9 +2196,9 @@
                   {
                     "name": "app-units-svc-sa_app_analytics_connector_svc-permission",
                     "scope": ["units-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2210,11 +2210,11 @@
                   {
                     "name": "app-units-svc-sa_app_augury_connector_svc-permission",
                     "scope": ["units-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-units-svc",
         "scopes": ["units-read", "units-reset"],
@@ -2234,9 +2234,9 @@
                   {
                     "name": "app-kpi-timeseries-svc-basic-permission",
                     "scope": ["alerts-update", "alerts-read", "alerts-create"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2254,9 +2254,9 @@
                       "alerts-management-onboard",
                       "alerts-create"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2273,11 +2273,11 @@
                       "alerts-create",
                       "alerts-management-onboard"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-kpi-timeseries-svc",
         "attributes": {
@@ -2306,9 +2306,9 @@
                       "read-notification-templates",
                       "send-notification-mail"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2325,9 +2325,9 @@
                       "delete-notification-templates",
                       "send-notification-mail"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2344,9 +2344,9 @@
                       "delete-notification-templates",
                       "send-notification-mail"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2363,11 +2363,11 @@
                       "delete-notification-templates",
                       "send-notification-mail"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-notification-fdn-svc",
         "attributes": {
@@ -2396,9 +2396,9 @@
                       "cmms-connector-notifications",
                       "cmms-connector-login"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2414,9 +2414,9 @@
                       "cmms-connector-notifications",
                       "cmms-connector-login"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2432,11 +2432,11 @@
                       "cmms-connector-notifications",
                       "cmms-connector-login"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-cmms-connector-svc",
         "attributes": {
@@ -2469,9 +2469,9 @@
                       "connector-timeseries-summary",
                       "connector-generateAnomalyEvent"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2489,9 +2489,9 @@
                       "connector-timeseries-dynamicRead",
                       "connector-timeseries-summary"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2514,9 +2514,9 @@
                       "connector-generateAnomalyEvent",
                       "connector-generateAlarm"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2535,11 +2535,11 @@
                       "connector-timeseries-summary",
                       "connector-generateAnomalyEvent"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-analytics-connector-svc",
         "realmRoles": ["sa_app_analytics_connector_svc"],
@@ -2577,9 +2577,9 @@
                       "patch-tag-scope",
                       "delete-scope"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2597,11 +2597,11 @@
                       "patch-tag-scope",
                       "delete-scope"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-object-store-fdn-svc",
         "realmRoles": ["sa_app_object_store_fdn_svc"],
@@ -2632,9 +2632,9 @@
                       "map-data-update",
                       "map-data-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2646,11 +2646,11 @@
                   {
                     "name": "app-geo-svc-basic-permission",
                     "scope": ["map-data-fetch", "map-data-update"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-geo-svc",
         "realmRoles": ["sa_app_geo_svc"],
@@ -2706,9 +2706,9 @@
                       "dbIntegration-instManage-getMapping",
                       "dbIntegration-updatePipeline"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2735,9 +2735,9 @@
                       "dbIntegration-get-modelMeta",
                       "dbIntegration-instManage-getMapping"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2753,9 +2753,9 @@
                       "dbIntegration-instManage-getPipelineInstance",
                       "dbIntegration-getPipeline"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2775,9 +2775,9 @@
                       "dbIntegration-getPipelineMeta",
                       "dbIntegration-update-modelMeta"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2816,9 +2816,9 @@
                       "dbIntegration-instManage-getMapping",
                       "dbIntegration-updatePipeline"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2836,11 +2836,11 @@
                       "dbIntegration-createSchedule",
                       "dbIntegration-getSchedule"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-analytics-dbintegration-svc",
         "scopes": [
@@ -2896,9 +2896,9 @@
                       "deployer-pipeline-management",
                       "deployer-model-management"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2910,11 +2910,11 @@
                   {
                     "name": "app-analytics-deployer-svc-sa_app_analytics_orchestrator_svc-permission",
                     "scope": ["deployer-pipeline-management"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-analytics-deployer-svc",
         "scopes": [
@@ -2948,9 +2948,9 @@
                       "gateway-insightMeta-read",
                       "gateway-svc-pipelineInstances-read"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -2998,9 +2998,9 @@
                       "gateway-scheduler-read",
                       "gateway-meta-manage-update"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -3019,9 +3019,9 @@
                       "gateway-scheduler-delete",
                       "gateway-meta-delete"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -3033,9 +3033,9 @@
                   {
                     "name": "app-analytics-gateway-svc-sa_app_analytics_orchestrator_svc-permission",
                     "scope": ["gateway-instance-mapping-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -3053,11 +3053,11 @@
                       "gateway-meta-manage-read",
                       "gateway-insightMeta-read"
                     ]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-analytics-gateway-svc",
         "attributes": {
@@ -3114,9 +3114,9 @@
                   {
                     "name": "app-failure-mode-svc-basic-permission",
                     "scope": ["failuremodes-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -3128,9 +3128,9 @@
                   {
                     "name": "app-failure-mode-svc-administrator-permission",
                     "scope": ["failuremodes-create", "failuremodes-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -3142,11 +3142,11 @@
                   {
                     "name": "app-failure-mode-svc-sa_app_kpi_worker_svc-permission",
                     "scope": ["failuremodes-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-failure-mode-svc",
         "realmRoles": ["sa_app_failure_mode_svc"],
@@ -3167,9 +3167,9 @@
                   {
                     "name": "app-auxiliary-config-info-svc-basic-permission",
                     "scope": ["failuremodes-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -3181,9 +3181,9 @@
                   {
                     "name": "app-auxiliary-config-info-svc-administrator-permission",
                     "scope": ["failuremodes-create", "failuremodes-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
           },
           {
@@ -3195,11 +3195,11 @@
                   {
                     "name": "app-failure-mode-svc-sa_app_kpi_worker_svc-permission",
                     "scope": ["failuremodes-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-auxiliary-config-info-svc",
         "realmRoles": ["default-roles-s1e"],
@@ -3220,11 +3220,11 @@
                   {
                     "name": "app-preference-svc-basic-permission",
                     "scope": ["failuremodes-read"]
-                  
+                  }
                 ]
-              
+              }
             ]
-          
+          }
         ],
         "name": "app-preference-svc",
         "realmRoles": ["default-roles-s1e"],
@@ -3233,6 +3233,7 @@
         },
         "scopes": ["add-user-pref", "get-user-pref","get-filtered-user-pref"],
         "secret": "/CLIENT_SECRET/APP_PREFERENCE_SVC"
-      
+      }
     ]
   }
+}}
