@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 issue_data = {
                     'title': alarm.get('AlarmName'),
                     "body": 'This is a test issue created using the GitHub API and Python requests library.',
-                    'labels': ['bug']
+                    'labels': "alarm"
                 }
                 issue_alarm.append(issue_data)
         else:
