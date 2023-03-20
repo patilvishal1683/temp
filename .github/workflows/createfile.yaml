@@ -25,7 +25,6 @@ jobs:
       - name: python as script
         run: |
           pip install boto3
-          pip install requ
           output=$(python3 testalarm.py)
           echo $output
 #       - name: listFile
