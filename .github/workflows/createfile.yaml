@@ -24,6 +24,7 @@ jobs:
         uses: actions/checkout@v2
       - name: python as script
         run: |
+          pip install boto3
           output=$(python3 testalarm.py)
           echo $output
 #       - name: listFile
