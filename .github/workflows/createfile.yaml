@@ -2,6 +2,8 @@ name: pythonfile
 on: [workflow_dispatch]
 jobs:
   InstallPython:
+    outputs:
+      matrix: ${{ steps.matrix.outputs.value }}
     runs-on: ubuntu-latest
     steps:
       - id: matrix
@@ -24,21 +26,21 @@ jobs:
       - name: cloneCode
         uses: actions/checkout@v2
       - name: python as script
+        id: matrix
         run: |
           pip install boto3
           output=$(python3 testalarm.py)
           echo $output
-#          echo '::set-output name=value::$output'
-#  build:
-#    needs: [ InstallPython ]
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        value: ${{fromJson(needs.InstallPython.outputs.matrix)}}
-#    steps:
-#      - name: Test
-#        run: |
-#          echo "${{ matrix.value }}"
-
+          echo '::set-output name=value::$output'
+  build:
+    needs: [ InstallPython ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        value: ${{fromJson(needs.InstallPython.outputs.matrix)}}
+    steps:
+      - name: Test
+        run: |
+          echo "${{ matrix.value }}"
 
 
