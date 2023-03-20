@@ -40,7 +40,7 @@ jobs:
           owner: patilvishal1683
           repo: temp
           token: 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
-          title: Simple test issue
-          body: my new issue
+          title: ${{ matrix.value.title }}
+          body:  ${{ matrix.value.body }}
 
 
