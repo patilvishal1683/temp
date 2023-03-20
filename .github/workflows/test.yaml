@@ -32,10 +32,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJson(needs.InstallPython.outputs.matrix)}}
+        value: ${{fromJson(needs.InstallPython.outputs.matrix)}} # "${{ matrix.value.title }}"
     steps:
-      - name: Test
-        run: |
-          echo "${{ matrix.value.title }}"
+      - name: Create Github Issue
+        uses: dacbd/create-issue-action@v1.2.1
+        with:
+          token: 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
+          title: ${{ matrix.value.title }}
+          body: ${{ matrix.value.body }}
+          labels: ${{ matrix.value.labels }}
 
 
