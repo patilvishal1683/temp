@@ -1,0 +1,45 @@
+name: pythonfile
+on: [workflow_dispatch]
+jobs:
+  InstallPython:
+    outputs:
+      matrix: ${{ steps.matrix.outputs.value }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: InstallPython
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+      - name: aws-cli
+        run: |
+          sudo curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && \
+          sudo chmod +x install-aws.sh
+          sudo ./install-aws.sh "v2" "amd64"
+          sudo rm install-aws.sh
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: "AKIAU56HZVLTYON7ZMHT"
+          aws-secret-access-key: "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"
+          aws-region: us-east-1
+      - name: cloneCode
+        uses: actions/checkout@v2
+      - name: python as script
+        id: matrix
+        run: |
+          pip install boto3
+          output=$(python3 testalarm.py)
+          echo $output
+          echo "{alarm}={$output}" >> $GITHUB_OUTPUT
+  build:
+    needs: [ InstallPython ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        value: ${{fromJson(needs.InstallPython.outputs.matrix)}}
+    steps:
+      - name: Test
+        run: |
+          echo "${{ matrix.alarm }}"
+
+
