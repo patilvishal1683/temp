@@ -37,7 +37,9 @@ jobs:
       - name: Create Github Issue
         uses: dacbd/create-issue-action@main
         with:
-          token: ${{ secrets.token }}
+          owner: patilvishal1683
+          repo: temp
+          token: token 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
           title: Simple test issue
           body: my new issue
 
