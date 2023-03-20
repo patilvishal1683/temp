@@ -34,13 +34,11 @@ jobs:
       matrix:
         value: ${{fromJson(needs.InstallPython.outputs.matrix)}} # "${{ matrix.value.title }}"
     steps:
-      - name: Create an issue
-        uses: JasonEtco/create-an-issue@v2.9.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+      - name: Create Github Issue
+        uses: dacbd/create-issue-action@main
         with:
-          title: ${{ matrix.value.title }}
-          body: ${{ matrix.value.body }}
-          labels: ${{ matrix.value.labels }}
+          token: ${{ secrets.token }}
+          title: Simple test issue
+          body: my new issue
 
 
