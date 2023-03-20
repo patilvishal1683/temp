@@ -14,10 +14,11 @@ jobs:
           sudo chmod +x install-aws.sh
           sudo ./install-aws.sh "v2" "amd64"
           sudo rm install-aws.sh
-      - name: Configure AWS credentials from Production account
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::339184560871:role/test
+          aws-access-key-id: "AKIAU56HZVLTYON7ZMHT"
+          aws-secret-access-key: "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"
           aws-region: us-east-1
       - name: cloneCode
         uses: actions/checkout@v2
