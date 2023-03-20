@@ -37,7 +37,7 @@ jobs:
       - name: Create Github Issue
         uses: dacbd/create-issue-action@v1.2.1
         with:
-          token: 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
+          token: ${{ github.token }}
           title: ${{ matrix.value.title }}
           body: ${{ matrix.value.body }}
           labels: ${{ matrix.value.labels }}
