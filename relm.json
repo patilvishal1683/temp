@@ -1,4 +1,4 @@
-{
+
   "rootKeycloakUser": "admin",
   "rootKeycloakUserPass": "Test@123",
   "tenantAdminUsername": "test",
@@ -11,6 +11,5 @@
     "enabled": true,
     "attributes": {
       "client_credentials.use_refresh_token": "false"
-    }
-  }
-}
+
+

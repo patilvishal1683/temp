@@ -8,6 +8,17 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: '3.x'
+      - name: aws-cli
+        run: |
+          curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && \
+          chmod +x install-aws.sh
+          ./install-aws.sh "v2" "amd64"
+          rm install-aws.sh  
+      - name: Configure AWS credentials from Production account
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::339184560871:role/test
+          aws-region: us-east-1
       - name: cloneCode
         uses: actions/checkout@v2
       - name: python as script

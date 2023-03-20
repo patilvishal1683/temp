@@ -11,7 +11,6 @@
     "enabled": true,
     "attributes": {
       "client_credentials.use_refresh_token": "false"
-    
    }, 
     "accessTokenLifespan": 3600,
     "accessTokenLifespanForImplicitFlow": 900,

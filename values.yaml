@@ -1,0 +1,947 @@
+## This is a YAML-formatted file
+## Declare variables to be passed into your templates.
+imagePullPolicy: Always
+replicaCount: 2
+nameOverride: ''
+fullnameOverride: ''
+clusterDomain: cluster.local
+
+## Name of the repository from which image will be pulled.
+repository: &repository 'container-registry.prod1158-uswest1.revenera.com/s1apm_containers'
+## Value should be AzureServiceBus or AmazonRabbitMQ.
+# INPUT
+messageServiceProvider: &messageServiceProvider ''
+# INPUT
+messageServiceConnectionStringExternal: &messageServiceConnectionStringExternal ''
+# INPUT
+messageServiceConnectionStringInternal: &messageServiceConnectionStringInternal ''
+
+
+## Set image pull secret name for pulling System 1 Enterprise images.
+## Secrets must be manually created in the namespace.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets:
+- name: apm-image-pullcreds
+
+## Tenant ID (GUID)
+# INPUT
+tenantId: &tenantId ''
+## Tenant name
+# INPUT
+tenantName: &tenantName ''
+
+
+## Redis instance details
+# INPUT
+redis-shared: &redis-shared
+  ## Redis Host
+  redisHost: ''
+  ## Redis Port
+  redisPort: '6379'
+
+## PostgreSQL instance Details.
+#
+# Alerts
+# INPUT
+postgresql-alerts: &postgresql-alerts
+   ## PostgreSQL User
+  postgresqlUsername: ''
+  ## PostgreSQL Database Host
+  postgresqlDatabaseHost: ''
+  ## PostgreSQL Database  Port
+  postgresqlDatabasePort: '5432'
+
+# Asset
+# INPUT
+postgresql-asset: &postgresql-asset
+   ## PostgreSQL User
+  postgresqlUsername: ''
+  ## PostgreSQL Database Host
+  postgresqlDatabaseHost: ''
+  ## PostgreSQL Database  Port
+  postgresqlDatabasePort: '5432'
+
+# Shared
+# INPUT
+postgresql-shared: &postgresql-shared
+   ## PostgreSQL User
+  postgresqlUsername: ''
+  ## PostgreSQL Database Host
+  postgresqlDatabaseHost: ''
+  ## PostgreSQL Database  Port
+  postgresqlDatabasePort: '5432'
+
+# Timeseries
+# INPUT
+postgresql-timeseries: &postgresql-timeseries
+   ## PostgreSQL User
+  postgresqlUsername: ''
+  ## PostgreSQL Database Host
+  postgresqlDatabaseHost: ''
+  ## PostgreSQL Database  Port
+  postgresqlDatabasePort: '5432'
+
+# Keycloak
+# INPUT
+postgresql-keycloak: &postgresql-keycloak
+   ## PostgreSQL User
+  postgresqlUsername: ''
+  ## PostgreSQL Database Host
+  postgresqlDatabaseHost: ''
+  ## PostgreSQL Database  Port
+  postgresqlDatabasePort: '5432'
+
+## Sub Chart values
+subChartVars: &subchart-vars
+  tenantId: *tenantId
+  tenantName: *tenantName
+  messageServiceProvider: *messageServiceProvider
+  repository: *repository
+  privateCA: true
+  #INPUT keycloak host
+  keycloakHost: '' #keycloakdomain-name
+  # INPUT
+  imagePullSecrets:
+  - name: apm-image-pullcreds
+  locationConstraint: us-east-1
+  ##AccessID for object-store & zenko (could be any alphanumeric string)
+  scalityAccessID: doLrcZ5j50fSsXI9UARf
+
+keycloak:
+  <<: *subchart-vars
+  configureRealm:
+    enabled: true
+## Keycloak Realm Details.
+## Realm Login URL: https://<KEYCLOAK_HOST_NAME>/auth/admin/<TENANT_NAME>/console/
+  ## Tenant admin user name
+  tenantAdminUsername: s1e-realm-admin
+  ## Tenant admin password
+  # Password should contain one upper case character, one digit, one special character. Minimum length 8 characters
+  tenantAdminPassword: 2ksFA@KWKS9Dxv
+## Session Timeouts in Keycloak (is seconds)
+  ssoSessionIdleTimeout: '1800'
+  ssoSessionIdleTimeoutInMilliseconds: '7200000'
+  ssoSessionMaxLifespan: '43200'
+  accessTokenLifespan: '300'
+## Keycloak ingress Details.
+  ingress:
+    enabled: true
+    # Ingress annotations
+    annotations:
+      # cert-manager.io/cluster-issuer: letsencrypt-prod
+      kubernetes.io/tls-acme: 'true'
+      nginx.ingress.kubernetes.io/rewrite-target: /$1
+      nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+
+    path: /?(.*)
+    ## Must be provided if Ingress is enabled
+    ##
+    hosts:
+    - host: keycloak.companyname.com
+
+    ## Secrets must be manually created in the namespace or usign LetsEncrypt
+    ##
+    # INPUT
+    tls:
+    - hosts:
+      - keycloak.companyname.com
+      secretName: keycloak-tls
+  # INPUT
+  applicationHost: system1enterprise.companyname.com
+
+  postgresql:
+    postgresqlDatabase: keycloakpgsqldb
+    <<: *postgresql-keycloak
+
+  ## Keycloak Configuration
+  appshell:
+    clientSecret: &appShellSecret hdLPJDxN1539MnsVe7LqfnYf7TWnhSTAJp8s
+
+  timeseriesFdnSvc:
+    clientSecret: &timeSeriesFdnSecret X73zhme7ogkGjvD8hlQkDucqPMtZeRLv00c3
+
+  accsFdnSvc:
+    clientSecret: &accsFdnSecret 2KUU1HdlxcUKmsfobuGxxX2xJDKCAAI0k9bG
+
+  alertsFdnSvc:
+    clientSecret: &alertsFdnSecret 5Q5TExLz0eOQqb7M9QhYT6LmjURfD7K0LllN
+
+  assetFdnSvc:
+    clientSecret: &assetFdnSecret fuh4hj2FpdP5appU9KNE2wcsslIbfCh3a2T8
+
+  auguryConnectorSvc:
+    clientSecret: &auguryConnectorSecret Uj9bmwH37IQniqtYDJFmlWzABWZ9w65IjTmW
+
+  eventsSvc:
+    clientSecret: &eventsSecret 0g3IWZ26q4dOD4AvFzBn32rZi039ovTGIcc5
+
+  failureModeSvc:
+    clientSecret: &failureModeSecret ZoHYSGcpnF0H4g4YwzfoEi6IoP1pmGX96XUC
+
+  fleetMetaSearchSvc:
+    clientSecret: &fleetMetaSearchSecret JFIOyLZ7FnDclwVd5diXGnDTzF9hHeZew08S
+
+  fleetMetaSyncSvc:
+    clientSecret: &fleetMetaSyncSecret xznJGSozLvcaqt4k20zCYnnzCBKu8mUVV0xz
+
+  fleetMetaSearchApp:
+    clientSecret: &fleetMetaSearchAppSecret qW2Qm62BBfpw0yExncpcPAo1cISQdHrCSBD6
+
+  hierarchyModesApp:
+    clientSecret: &hierarchyModesSecret FecQn4FeArv5LjeVAE2PZ92dtlYTpmWc1dgw
+
+  kpiComputeSvc:
+    clientSecret: &kpiComputeSecret 5FdbzJWQPiYjwoI7LzcU9zdcc5TiurvOzWwK
+
+  kpiSvc:
+    clientSecret: &kpiSecret OgTORpArOWsRbPpr3t6KLO1ohs9F4xxkNI0V
+
+  fleetConfigIngestorSvc:
+    clientSecret: &fleetConfigIngestorSecret sfMrNi2itpSgDAqhd53vt3uA50vzlT52dDWb
+
+  fleetEventIngestorSvc:
+    clientSecret: &fleetEventIngestorSecret 1ocpHGba6RSPw82fA95J28z8DdM6hmMy1Qn9
+
+  mapSvc:
+    clientSecret: &mapSecret p6XQkx6Y7EXswJ0MXuJDiAH1pMsAk3d8eJg7
+
+  userMgmtFdnSvc:
+    clientSecret: &userMgmtFdnSecret 2eVk33J3L81FvizSGmuYMAK2c35OPO22kP42
+
+  geoDataSvc:
+    clientSecret: &geoDataSecret hhQI7GIKsECB2EfpDvG3ApFCRAgOHnpmeTAJ
+
+  analyticsConnectorSvc:
+    clientSecret: &analyticsConnectorSecret kd9yf7xwUNa5LIAOYvFh6HMD5y14AfSUVd5u
+
+  analyticsDeployerSvc:
+    clientSecret: &analyticsDeployerSecret 7YFabAqcQ1Lg0D6erNXNY79XqyxLltOWKJYT
+
+  analyticsOrchestratorSvc:
+    clientSecret: &analyticsOrchestratorSecret rM7cXlo3rUrx6K9x7NdaCxDqJnJjG9YGa3N8
+
+  analyticsSchedulerSvc:
+    clientSecret: &analyticsSchedulerSecret QuVxQz3Ve3Q9P2vSVeVA9XpfssCUCHXwEo9B
+
+  kpiTimeSeriesSvc:
+    clientSecret: &kpiTimeSeriesSecret Wevk9EAqL1vKEnMvnRuEJicXxHLEkXZhoeHy
+
+  kpiWorkerSvc:
+    clientSecret: &kpiWorkerSecret SXg4E4BJFMeMmcWbPp0ilGy6Jv2E0lxw5kqs
+
+  licenseSvc:
+    clientSecret: &licenseSecret FwaoIiQq4QlRNDSqQieSEzIToraLvVeLzJgx
+
+  unitSvc:
+    clientSecret: &unitSecret uY6lKgEACFiuNBBY8DUNQgjp0jsAMMfjpM0z
+
+  caseAlertsFdnSvc:
+    clientSecret: &caseAlertsFdnSvc Ngbnqedq6zZqnKE1SVSl98GSFjwPc9q7huub
+
+  caseMgmtFdnSvc:
+    clientSecret: &caseMgmtFdnSvc 9jw0hexwc8elWHfoEvcR7mRMRw9zMk2bd2rV
+
+  notificationFdnSvc:
+    clientSecret: &notificationFdnSvc 9vemzBPmMYHfbrCcY1RdtJfxbV6N54N7P1lu
+
+  objectStoreFdnSvc:
+    clientSecret: &objectStoreFdnSvc 3OFULzsJ0Tv2Yev3sO6DtwmO93xfb6xyJhVO
+
+  settingApp:
+    clientSecret: &settingApp auBuNNxCZ48qQAMsUNUptJTrxQjaYhyKa1oi
+
+  iguazioSvc:
+    clientSecret: &iguazioSvcSecret WPFkjUbs9orCamGva60DmImXewyqKNn1CzQD
+
+  cmmsConnectorSvc:
+    clientSecret: &cmmsConnectorSvc w9NUrIvuf6lwFYQBes0h3LdMfl2RzYPJGTBt
+
+  caseApp:
+    clientSecret: &caseApp 0eR5RHW1A3YSfgdKs7toJEwE621WbzIXcCvw
+
+  schedulerSvc:
+    clientSecret: &schedulerSvc PBLa4pbfYHRQ4hTg00SWnz6J7casOw0PeHKk
+
+  analyticsGatewaySvc:
+    clientSecret: &analyticsGatewaySvc xW4ukXQVf7apmZcuuIFUmqYmgH0LCPVqYQOh
+
+  dashboardSvc:
+    clientSecret: &dashboardSvc xW4ukXQVf7apmZcuuIFUmqYmgH0LCPVqYUir
+
+  analyticsOnboardingSvc:
+    clientSecret: &analyticsOnboardingSvc fK6ukXQVf7apmZcuuIFUmqYmgH0LCPVqYSqs
+
+  analyticsDbIntegrationSvc:
+    clientSecret: &analyticsDbIntegrationSvc xW4ukXQVf7apmZcuuIFUmqYmgH0LCPVqYSqs
+
+  notificationMgmtSvc:
+    clientSecret: &notificationMgmtSvc xWAeyxmchVJUM8PYbnjrlLGwqliuLZfIHwCc
+
+  caseSvc:
+    clientSecret: &caseSvc 5NJJoUeIZ6vRQMS8ioCSvryHHQcIFKdys0zs
+
+  iCenterConnectorSvc:
+    clientSecret: &iCenterConnectorSvc wFHnKcasjCEQkBCxmXu9ZhU1U0TdHqDpwukD
+
+  # auxiliaryConfigInfoSvc:
+  #   clientSecret: &auxiliaryConfigInfoSvc gApgZKZvCmUN3i0EQ5r2grm5vsDhbpSL68qG
+
+  # blufinConnectorSvc:
+  #   clientSecret: &blufinConnectorSvc gdqfefAcpti9JV27TVsO2dELnacmVzgXjJti
+
+  # rangerproConnectorSvc:
+  #   clientSecret: &rangerproConnectorSvc o4uhu6liq6tUAZfNsbtfATOrdPUBctXMfOwO
+
+  # preferenceSvc:
+  #   clientSecret: &preferenceSvc R8uhu6liq6tUAZfNsbtfATordPUBctXMfOwT
+
+  # bentlyPerformanceeSvc:
+  #   clientSecret: &bentlyPerformanceeSvc GcP6eP2p9jBONJHNJ680leDWbRMqt151cSFQ
+
+  # auguryDashboardSvc:
+  #   clientSecret: &auguryDashboardSvc GcP6eP2p9jBONJHNJ680leDWbRMqt151cSFQ
+
+
+#app-shell subchart details
+app-shell:
+  <<: *subchart-vars
+  clientSecret: *appShellSecret
+  multiInstance: true
+  analyticsEnabled: true
+  redis:
+    <<: *redis-shared
+  extraConfig:
+    enabled: true
+    config: |
+      "tls": true,
+      "password": "K8SECRET.REDIS_PASSWORD"
+  keycloak:
+  # INPUT
+    hosts:
+    - host: keycloak.companyname.com
+  ingress:
+  # INPUT
+    hosts:
+    - host: system1enterprise.companyname.com
+
+#timeseries-fdn-svc subchart details
+timeseries-fdn-svc:
+  <<: *subchart-vars
+  postgresql:
+    <<: *postgresql-timeseries
+  clientSecret: *timeSeriesFdnSecret
+  messageServiceConnectionString: *messageServiceConnectionStringExternal
+
+#accs-fdn-svc subchart details
+accs-fdn-svc:
+  <<: *subchart-vars
+  clientSecret: *accsFdnSecret
+
+#alerts-fdn-svc subchart details
+alerts-fdn-svc:
+  <<: *subchart-vars
+  clientSecret: *alertsFdnSecret
+  postgresql:
+    # PostgreSQL Database
+    postgresqlDatabase: alertspgsqldb
+    <<: *postgresql-alerts
+    enablePGTls: true
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+  environment: production
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+
+#analytics-deployment-app subchart details
+analytics-deployment-app:
+  <<: *subchart-vars
+  enabled: true
+
+#asset-fdn-svc subchart details
+asset-fdn-svc:
+  <<: *subchart-vars
+  clientSecret: *assetFdnSecret
+  postgresql:
+    # PostgreSQL Database
+    <<: *postgresql-asset
+    enablePGTls: verifyfull
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+
+#dashboard-app subchart details
+dashboard-app:
+  <<: *subchart-vars
+
+#dashboard-svc subchart details
+dashboard-svc:
+  <<: *subchart-vars
+  clientSecret: *dashboardSvc
+  postgresql:
+    <<: *postgresql-alerts
+    enablePGTls: 'true'
+
+#events-app for subchart details
+events-app:
+  <<: *subchart-vars
+
+#events-svc for subchart details
+events-svc:
+  <<: *subchart-vars
+  clientSecret: *eventsSecret
+
+#failure-mode-svc subchart details
+failure-mode-svc:
+  <<: *subchart-vars
+  postgresql:
+    <<: *postgresql-alerts
+  clientSecret: *failureModeSecret
+  externalMessageServiceConnectionString: *messageServiceConnectionStringExternal
+  internalMessageServiceConnectionString: *messageServiceConnectionStringInternal
+
+#fleet-meta-search-svc subchart details
+fleet-meta-search-svc:
+  <<: *subchart-vars
+  postgresql:
+    <<: *postgresql-asset
+  clientSecret: *fleetMetaSearchSecret
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+
+#fleet-meta-sync-svc subchart details
+fleet-meta-sync-svc:
+  <<: *subchart-vars
+  clientSecret: *fleetMetaSyncSecret
+
+#fleetMetaSearchApp subchart details
+fleet-meta-search-app:
+  <<: *subchart-vars
+  clientSecret: *fleetMetaSearchAppSecret
+
+#help-svc subchart details
+help-svc:
+  <<: *subchart-vars
+
+#hierarchy-modes-app subchart details
+hierarchy-modes-app:
+  <<: *subchart-vars
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+    disableCluster: true
+  clientSecret: *hierarchyModesSecret
+  dontUseFile: false
+  integratedHierarchyFlags: |
+    {
+      "showIntegratedHierarchy": false,
+      "integratedHierarchyNavigation": false,
+      "hideCMMSAndStrategy": false
+    }
+  rdpOverrides: '[]'
+  expertAppJumpOffUrl: ''
+  ## Need to set this true to enable jump-off feature.
+  enableExpertApp: true
+  expertAppAuguryJumpOffUrl: app.augury.com
+
+#kpi-compute-svc subchart details
+kpi-compute-svc:
+  <<: *subchart-vars
+  clientSecret: *kpiComputeSecret
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+  postgresql:
+    <<: *postgresql-alerts
+  redis:
+    <<: *redis-shared
+    disableCluster: true
+    enableRedisTls: true
+    redisUsername: ''
+
+#kpi-svc subchart details
+kpi-svc:
+  <<: *subchart-vars
+  clientSecret: *kpiSecret
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+  postgresql:
+    <<: *postgresql-alerts
+  redis:
+    <<: *redis-shared
+    disableCluster: true
+    enableRedisTls: true
+    redisUsername: ''
+
+## fleet-config-ingestor-svc subchart details
+fleet-config-ingestor-svc:
+  <<: *subchart-vars
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+  clientSecret: *fleetConfigIngestorSecret
+  messageServiceConnectionString: *messageServiceConnectionStringExternal
+
+## fleet-event-ingestor-svc subchart details
+fleet-event-ingestor-svc:
+  <<: *subchart-vars
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+  clientSecret: *fleetEventIngestorSecret
+  messageServiceConnectionString: *messageServiceConnectionStringExternal
+
+## map-app subchart details
+map-app:
+  <<: *subchart-vars
+
+## map-svc subchart details
+map-svc:
+  <<: *subchart-vars
+  postgresql:
+    <<: *postgresql-shared
+  clientSecret: *mapSecret
+
+#plots-svc subchart details
+plots-svc:
+  <<: *subchart-vars
+
+#plots-app subchart details
+plots-app:
+  <<: *subchart-vars
+
+#text-svc subchart details
+text-svc:
+  <<: *subchart-vars
+
+#unified-workflow-app subchart details
+unified-workflow-app:
+  <<: *subchart-vars
+
+##user-mgmt-fdn-svc subchart details
+user-mgmt-fdn-svc:
+  <<: *subchart-vars
+  clientSecret: *userMgmtFdnSecret
+
+#user-mgmt-app subchart details
+user-mgmt-app:
+  <<: *subchart-vars
+
+#user-mgmt-svc subchart details
+user-mgmt-svc:
+  <<: *subchart-vars
+
+#geo-data-svc subchart details
+geo-data-svc:
+  <<: *subchart-vars
+  postgresql:
+    <<: *postgresql-shared
+  clientSecret: *geoDataSecret
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+
+#case-alerts-fdn-svc subchart details
+case-alerts-fdn-svc:
+  <<: *subchart-vars
+  clientSecret: *caseAlertsFdnSvc
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+    enableRedisCluster: false
+  postgresql:
+    <<: *postgresql-alerts
+    enablePGTls: true
+
+#case-mgmt-fdn-svc subchart details
+case-mgmt-fdn-svc:
+  <<: *subchart-vars
+  clientSecret: *caseMgmtFdnSvc
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+  postgresql:
+    <<: *postgresql-alerts
+    enablePGTls: true
+
+#notification-fdn-svc subchart details
+notification-fdn-svc:
+  <<: *subchart-vars
+  enabled: true
+  clientSecret: *notificationFdnSvc
+  smtpUserName: ''
+  smtpPort: 587
+  smtpFrom: ''
+  smtpHost: ''
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+    enableRedisCluster: false
+  postgresql:
+    <<: *postgresql-shared
+    enablePGTls: true
+
+#object-store-fdn-svc subchart details
+object-store-fdn-svc:
+  <<: *subchart-vars
+  enabled: 'true'
+  clientSecret: *objectStoreFdnSvc
+  # INPUT
+  #  In case of AWS - S3 Bucket Name. For Azure metadata
+  bucketName: 'metadata'
+  bucketPrefix: ''
+  bucketSuffix: ''
+  storageLocation: aws_s3
+
+#zenko-cloudserver-fdn-svc subchart details
+zenko-cloudserver-fdn-svc:
+  <<: *subchart-vars
+  enabled: 'true'
+
+  #Can be aws or Azure
+  cloud: ''
+  ## if cloud = aws. Provide s3 bucketName to upload attachments.
+  # INPUT
+  aws:
+    bucketName: ''
+
+  ## if cloud = azure
+  azure:
+    containerName: ''
+    storageAccountName: ''
+
+#case-app subchart deatils
+case-app:
+  <<: *subchart-vars
+  clientSecret: *caseApp
+
+#case-svc subchart details
+case-svc:
+  <<: *subchart-vars
+  clientSecret: *caseSvc
+  environment: production
+
+#kpi-timeseries-svc subchart details
+kpi-timeseries-svc:
+  <<: *subchart-vars
+  environment: production
+  redis:
+    <<: *redis-shared
+    enableRedisTls: 'true'
+  postgresql:
+    <<: *postgresql-alerts
+    enablePGTls: true
+  clientSecret: *kpiTimeSeriesSecret
+
+#kpi-worker-svc subchart details
+kpi-worker-svc:
+  <<: *subchart-vars
+  redis:
+    <<: *redis-shared
+    disableCluster: true
+    enableRedisTls: true
+  clientSecret: *kpiWorkerSecret
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+
+#license-svc subchart details
+license-svc:
+  <<: *subchart-vars
+  postgresql:
+    <<: *postgresql-shared
+  clientSecret: *licenseSecret
+  flexnetServerUrl: 'bakerhughes.flexnetoperations.com'
+
+#unit-svc subchart details
+units-svc:
+  <<: *subchart-vars
+  postgresql:
+    # PostgreSQL Database
+    <<: *postgresql-shared
+  clientSecret: *unitSecret
+
+#settings-app subchart details
+settings-app:
+  <<: *subchart-vars
+  clientSecret: *settingApp
+
+#cmms-connector-svc subchart details
+cmms-connector-svc:
+  <<: *subchart-vars
+  redis:
+    <<: *redis-shared
+    disableCluster: true
+    enableRedisTls: true
+  clientSecret: *cmmsConnectorSvc
+  messageServiceConnectionString: *messageServiceConnectionStringExternal
+
+#scheduler-svc subchart details
+scheduler-svc:
+  <<: *subchart-vars
+  postgresql:
+    <<: *postgresql-shared
+    enablePGTls: true
+  clientSecret: *schedulerSvc
+
+## Configuration for application ingress.
+ingress:
+  ## If true, application Ingress will be created
+  ##
+  enabled: true
+
+  ## Ingress annotations
+  annotations:
+    kubernetes.io/tls-acme: 'true'
+
+    ## Add Cert manager annotation only if you are using Lets Encrypt Issuer or ClusterIssuer with Cert Manager
+    #
+    #cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: 8m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '1200'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '1200'
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Robots-Tag: none";
+      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+      more_set_headers "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://api.mapbox.com; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline'; style-src-elem 'self' https://fonts.googleapis.com 'unsafe-inline'; worker-src blob: ; child-src blob: ; connect-src 'self' https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com ; frame-ancestors 'self'; base-uri 'self'; form-action 'self'";
+
+    # You can specify allowed client IP source ranges through the nginx.ingress.kubernetes.io/whitelist-source-range annotation.
+    # The value is a comma separated list of CIDRs, e.g. 10.0.0.0/24,172.10.0.1.
+    # nginx.ingress.kubernetes.io/whitelist-source-range: ""
+  path: /?(.*)
+
+  ## Must be provided if Ingress is enabled
+  ##
+  # INPUT
+  hosts:
+  - host: system1enterprise.companyname.com
+    ## Extra Paths
+    #
+    subChartPaths: []
+
+  ## Secrets must be manually created in the namespace or using LetsEncrypt
+  ##
+  # INPUT
+  tls:
+  - hosts:
+    - system1enterprise.companyname.com
+    secretName: system1enterprise-tls
+
+## *****No need to configure below services in case analytics module is disabled****
+
+#analytics-config-app subchart details
+analytics-config-app:
+  <<: *subchart-vars
+  enabled: false
+
+#analytics-connector-svc subchart details
+analytics-connector-svc:
+  <<: *subchart-vars
+  enabled: true
+  redis:
+    <<: *redis-shared
+    redisSSL: 'true'
+    disableCluster: 'true'
+  clientSecret: *analyticsConnectorSecret
+
+#analytics-dbintegration-svc subchart details
+# INPUT
+analytics-dbintegration-svc:
+  <<: *subchart-vars
+  schema: 'iapm_ai'
+  enabled: true
+  clientSecret: *analyticsDbIntegrationSvc
+  postgresql:
+    # PostgreSQL Database
+    <<: *postgresql-shared
+    postgresqlDatabase: "dbintegrationsvc"
+    enablePGTls: 'true'
+
+#analytics-deployer-svc subchart
+analytics-deployer-svc:
+  <<: *subchart-vars
+  enabled: true
+  redis:
+    <<: *redis-shared
+  ## Set flag to true, if redis instance is tls enabled.
+    redisSSL: 'true'
+  ##set flag to false, if redis instance is cluster.
+    disableCluster: 'true'
+  #external keycloak url
+  # INPUT
+  clientSecret: *analyticsDeployerSecret
+  iguazioSvc:
+    clientSecret: *iguazioSvcSecret
+  # INPUT
+  iguazio:
+    mlrunDbpath: ''
+    v3ioUsername: ''
+  ## Value should be 'aws' or 'azure'
+  # INPUT
+  cloud: ''
+
+  ## if cloud = aws
+  # INPUT
+  aws:
+    s3BucketName: ''
+    awsInstanceType: 'ml.c4.large'
+    awsInstanceCount: '1'
+
+  ## if cloud = azure
+  azure:
+    azureTenantId: ''
+    azureClientId: ''
+    azureWorkspaceName: ''
+    azureSubscriptionId: ''
+    azureResourceGroup: ''
+    azureCpuCores: ''
+    azureMemoryGb: ''
+
+#analytics-gateway-svc subchart
+analytics-gateway-svc:
+  <<: *subchart-vars
+  clientSecret: *analyticsGatewaySvc
+  enabled: true
+
+#analytics-metadata-svc subchart
+analytics-metadata-svc:
+  <<: *subchart-vars
+  enabled: true
+
+#analytics-orchestrator-svc subchart
+analytics-orchestrator-svc:
+  <<: *subchart-vars
+  redis:
+    <<: *redis-shared
+  ##set flag to false, if redis instance is cluster.
+    disableCluster: 'true'
+  ## Set flag to true, if redis instance is tls enabled.
+    redisSSL: 'true'
+  clientSecret: *analyticsOrchestratorSecret
+  enabled: true
+  # INPUT
+  analyticsConnectorPublicUrl: ''
+
+#analytics-scheduler-svc subchart
+analytics-scheduler-svc:
+  <<: *subchart-vars
+  clientSecret: *analyticsSchedulerSecret
+  enabled: true
+
+#asset-model-mapping-svc subchart
+asset-model-mapping-svc:
+  <<: *subchart-vars
+  enabled: true
+  redis:
+    <<: *redis-shared
+  ## if cloud = iguazio
+  # INPUT
+  iguazio:
+    v3ioUsername: ''
+
+#augury-connector-svc subchart
+augury-connector-svc:
+  <<: *subchart-vars
+  enabled: true
+  clientSecret: *auguryConnectorSecret
+  postgresql:
+    <<: *postgresql-shared
+  redis:
+    <<: *redis-shared
+    enableRedisTls: true
+    disableCluster: true
+  pipelineDelayInMinutesForTenantId: '240'
+  scheduleFrequencyMs: '600000'
+  isSchedulerUIEnabled: 'false'
+  messageServiceConnectionString: *messageServiceConnectionStringInternal
+  # INPUT
+  auguryBaseUrl: ''
+
+#analytics-onboarding-svc subchart
+analytics-onboarding-svc:
+  <<: *subchart-vars
+  clientSecret: *analyticsOnboardingSvc
+  enabled: true
+
+common-metadata:
+  tenantId_A: *tenantId
+  tenantName_A: *tenantName
+
+## Configuration for Pod Autoscaling.
+autoscaling:
+  ## If `true`, a autoscaling/v2beta2 HorizontalPodAutoscaler resource is created
+  enabled: true
+  ## The minimum and maximum number of replicas
+  minReplicas: 2
+  maxReplicas: 5
+  ## The metrics to use for scaling
+  metrics:
+  - resource:
+      name: memory
+      target:
+        averageUtilization: 80
+        type: Utilization
+    type: Resource
+  - resource:
+      name: cpu
+      target:
+        averageUtilization: 80
+        type: Utilization
+    type: Resource
+  ## The scaling policy to use. This will scale up quickly but only scale down a single Pod per 5 minutes.
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 300
+
+## Additional Pod annotations
+podAnnotations: {}
+
+## SecurityContext for the entire Pod. Every container running in the Pod will inherit this SecurityContext. This might be relevant when other components of the environment inject additional containers into running Pods
+podSecurityContext:
+  runAsUser: 10001
+  seccompProfile:
+    type: RuntimeDefault
+
+## SecurityContext for the container
+securityContext:
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  runAsUser: 10001
+  capabilities:
+    drop: [ALL]
+
+## Role based access control component.
+rbac:
+  create: true
+  rules:
+  - apiGroups:
+    - ''
+    resources:
+    - pods
+    verbs:
+    - get
+    - list
+
+serviceAccount:
+  ## Specifies whether a service account should be created
+  create: true
+  ## Annotations to add to the service account
+  annotations: {}
+  ## The name of the service account to use.
+  ## If not set and create is true, a name is generated using the fullname template
+  name: ''
+
+## Value for minimium no of pod to be running at any point of time.
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+#
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+
+## Affinity for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity.
+##
+affinity: {}
