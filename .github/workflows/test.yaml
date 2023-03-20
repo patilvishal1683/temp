@@ -6,10 +6,6 @@ jobs:
       matrix: ${{ steps.matrix.outputs.value }}
     runs-on: ubuntu-latest
     steps:
-      - name: InstallPython
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.x'
       - name: aws-cli
         run: |
           sudo curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && \
