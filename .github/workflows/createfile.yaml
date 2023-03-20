@@ -6,7 +6,6 @@ jobs:
       matrix: ${{ steps.matrix.outputs.value }}
     runs-on: ubuntu-latest
     steps:
-      - id: matrix
       - name: InstallPython
         uses: actions/setup-python@v1
         with:
