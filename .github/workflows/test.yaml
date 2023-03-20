@@ -2,7 +2,7 @@ name: pythonfile
 on: [workflow_dispatch]
 jobs:
   InstallPython:
-    continue-on-error: ${{ matrix.experimental }}
+    continue-on-error: true
     outputs:
       matrix: ${{ steps.matrix.outputs.value }}
     runs-on: ubuntu-latest
