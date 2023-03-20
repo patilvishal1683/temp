@@ -10,10 +10,10 @@ jobs:
           python-version: '3.x'
       - name: aws-cli
         run: |
-          curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && \
-          chmod +x install-aws.sh
-          ./install-aws.sh "v2" "amd64"
-          rm install-aws.sh  
+          sudo curl -L -o install-aws.sh https://raw.githubusercontent.com/unfor19/install-aws-cli-action/master/entrypoint.sh && \
+          sudo chmod +x install-aws.sh
+          sudo ./install-aws.sh "v2" "amd64"
+          sudo rm install-aws.sh
       - name: Configure AWS credentials from Production account
         uses: aws-actions/configure-aws-credentials@v2
         with:
