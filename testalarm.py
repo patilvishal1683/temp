@@ -1,6 +1,5 @@
 import boto3
 import pprint
-import requests
 import json
 
 OWNER = "patilvishal1683"
