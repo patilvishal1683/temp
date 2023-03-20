@@ -38,29 +38,9 @@ jobs:
       matrix:
         value: ${{fromJson(needs.InstallPython.outputs.matrix)}}
     steps:
-      - run: |
+      - name: Test
+        run: |
           echo "${{ matrix.value }}"
 
-#       - name: listFile
-#         id: test
-#         run: |
-#           output="github"
-#           echo "var=$output" >> $GITHUB_OUTPUT
-#           echo "var2=foo" >> $GITHUB_OUTPUT
-# #          echo $output >> $GITHUB_OUTPUT
-# #          echo 'EOF' >> $GITHUB_OUTPUT
-#       - name: installRequirements
-#         run: |
-#           echo ${{steps.test.outputs.var2}}
-#           pip3 install -r requirements.txt
 
-#       - name: runcode
-#         run: python3 main.py
-#       - name: openFile
-#         run: |
-#           message=$(cat output.txt)
-#           echo ::warning title={Error In file}::${message}
-#       - name: uploadArtifact
-#         uses: actions/upload-artifact@v3
-#         with:
-#           path: output.txt
+
