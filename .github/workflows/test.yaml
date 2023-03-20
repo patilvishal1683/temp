@@ -2,6 +2,7 @@ name: pythonfile
 on: [workflow_dispatch]
 jobs:
   InstallPython:
+    continue-on-error: ${{ matrix.experimental }}
     outputs:
       matrix: ${{ steps.matrix.outputs.value }}
     runs-on: ubuntu-latest
@@ -27,6 +28,7 @@ jobs:
           output=$(python3 testalarm.py)
           echo $output
           echo "{alarm}={$output}" >> $GITHUB_OUTPUT
+          echo $GITHUB_OUTPUT
   build:
     needs: [ InstallPython ]
     runs-on: ubuntu-latest
