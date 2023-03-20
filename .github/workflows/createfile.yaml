@@ -30,7 +30,7 @@ jobs:
           pip install boto3
           output=$(python3 testalarm.py)
           echo $output
-          echo '::set-output name=value::$output'
+#          echo '::set-output name=value::$output'
 #  build:
 #    needs: [ InstallPython ]
 #    runs-on: ubuntu-latest
