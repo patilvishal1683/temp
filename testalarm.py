@@ -36,7 +36,6 @@ if __name__ == "__main__":
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         if response.get('MetricAlarms'):
             for alarm in response.get('MetricAlarms'):
-                print(alarm)
                 issue_data = {
                     'title': alarm.get('AlarmName'),
                     "body": 'This is a test issue created using the GitHub API and Python requests library.',
