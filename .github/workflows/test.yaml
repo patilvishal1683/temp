@@ -30,7 +30,6 @@ jobs:
           echo "{alarm}={$output}" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
   build:
-    needs: [ InstallPython ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
