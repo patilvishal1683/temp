@@ -2,8 +2,6 @@ name: pythonfile
 on: [workflow_dispatch]
 jobs:
   InstallPython:
-    outputs:
-      matrix: ${{ steps.matrix.outputs.value }}
     runs-on: ubuntu-latest
     steps:
       - id: matrix
