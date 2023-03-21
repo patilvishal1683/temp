@@ -39,7 +39,7 @@ jobs:
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ secrets.GH_TOKEN }}
-          title: ${{ alarms.value.title }}
-          body:  ${{ alarms.value.body }}
+          title: ${{ matrix.value.title }}
+          body:  ${{ matrix.value.body }}
 
 
