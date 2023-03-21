@@ -23,6 +23,7 @@ jobs:
       - id: matrix
         run: |
           pip install boto3
+          pip install requests
           output=$(python3 testalarm.py)
           echo $output
           echo "alarm=$output" >> $GITHUB_OUTPUT
