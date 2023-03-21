@@ -18,6 +18,7 @@ jobs:
           aws-access-key-id: "AKIAU56HZVLTYON7ZMHT"
           aws-secret-access-key: "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"
           aws-region: us-east-1
+          mask-aws-account-id: 'no'
       - name: cloneCode
         uses: actions/checkout@v2
       - id: matrix
