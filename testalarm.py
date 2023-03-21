@@ -51,7 +51,7 @@ if __name__ == "__main__":
         "Content-Type": "application/json",
         "Authorization": "token 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"
     }
-    all_issues = check_issue_already_present(metadata=metadata, url=api_endpoint, alarms=alarms)
+    all_issues = check_issue_already_present(metadata=metadata, url=api_endpoint)
 
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         if response.get('MetricAlarms'):
