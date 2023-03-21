@@ -47,12 +47,12 @@ if __name__ == "__main__":
     """
     This endpoint is to get all issues from repo 
     """
-    api_endpoint = f'https://api.github.com/repos/{OWNER}/{REPO_NAME}/issues'
-    metadata = {
-        "Content-Type": "application/json",
-        "Authorization": f"token {sys.argv[1]}"
-    }
-    all_issues = check_issue_already_present(metadata=metadata, url=api_endpoint)
+    # api_endpoint = f'https://api.github.com/repos/{OWNER}/{REPO_NAME}/issues'
+    # metadata = {
+    #     "Content-Type": "application/json",
+    #     "Authorization": f"token {sys.argv[1]}"
+    # }
+    # all_issues = check_issue_already_present(metadata=metadata, url=api_endpoint)
 
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         if response.get('MetricAlarms'):
