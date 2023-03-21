@@ -72,4 +72,4 @@ if __name__ == "__main__":
             logger.debug(f"No MetricAlarms alarms present it given aw account")
     else:
         logger.debug(f"An error occurred in get alarm from aws account")
-    print(issue_alarm)
+    print(json.dumps(issue_alarm))
