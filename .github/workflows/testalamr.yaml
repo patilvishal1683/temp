@@ -3,7 +3,7 @@ on: [workflow_dispatch]
 jobs:
   InstallPython:
     outputs:
-      alarms: ${{ steps.getAlarms.outputs.alarm }}
+      alarms: ${{ steps.matrix.outputs.alarm_data }}
     runs-on: ubuntu-latest
     steps:
       - name: aws-cli
@@ -20,13 +20,13 @@ jobs:
           aws-region: us-east-1
       - name: cloneCode
         uses: actions/checkout@v2
-      - id: getAlarms
+      - id: matrix
         run: |
           pip install boto3
           pip install requests
           output=$(python3 testalarm.py)
           echo $output
-          echo "alarm=$output" >> $GITHUB_OUTPUT
+          echo "alarm_data=$output" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
   build:
     needs: InstallPython
