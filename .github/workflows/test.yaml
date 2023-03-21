@@ -3,7 +3,7 @@ on: [workflow_dispatch]
 jobs:
   InstallPython:
     outputs:
-      matrix: ${{ steps.matrix.outputs.alarm }}
+      matrix: ${{ steps.getAlarms.outputs.alarm }}
     runs-on: ubuntu-latest
     steps:
       - name: aws-cli
@@ -20,7 +20,7 @@ jobs:
           aws-region: us-east-1
       - name: cloneCode
         uses: actions/checkout@v2
-      - id: matrix
+      - id: getAlarms
         run: |
           pip install boto3
           pip install requests
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJson(needs.InstallPython.outputs.matrix)}} # "${{ matrix.value.title }}"
+        value: ${{fromJson(needs.InstallPython.outputs.alarm)}} # "${{ matrix.value.title }}"
     steps:
       - name: Create Github Issue
         uses: dacbd/create-issue-action@main
