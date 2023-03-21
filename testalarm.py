@@ -33,7 +33,7 @@ def check_issue_already_present(**kwargs) -> list:
             return issues
         else:
             logger.error(f"Error In Github get issue request {result.status_code}\n {result}")
-            raise Exception()
+            # raise Exception()
     except Exception as e:
         logging.exception("An Error Occurred in check_issue_already_present")
         pass
