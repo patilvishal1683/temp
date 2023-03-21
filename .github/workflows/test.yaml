@@ -3,7 +3,7 @@ on: [workflow_dispatch]
 jobs:
   InstallPython:
     outputs:
-      matrix: ${{ steps.getAlarms.outputs.alarm }}
+      alarms: ${{ steps.getAlarms.outputs.alarm }}
     runs-on: ubuntu-latest
     steps:
       - name: aws-cli
@@ -33,13 +33,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJson(needs.InstallPython.outputs.alarm)}} # "${{ matrix.value.title }}"
+        value: ${{fromJson(needs.InstallPython.outputs.alarms)}} # "${{ matrix.value.title }}"
     steps:
       - name: Create Github Issue
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ secrets.GH_TOKEN }}
-          title: ${{ matrix.value.title }}
-          body:  ${{ matrix.value.body }}
+          title: ${{ alarms.value.title }}
+          body:  ${{ alarms.value.body }}
 
 
