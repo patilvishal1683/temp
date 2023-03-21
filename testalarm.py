@@ -64,7 +64,7 @@ if __name__ == "__main__":
                 # else:
                 issue_data = {
                     'title': alarm.get('AlarmName'),
-                    'body': json.dumps(alarm),
+                    'body': json.dumps(alarm, default=str),
                     'labels': "alarm"
                 }
                 issue_alarm.append(issue_data)
