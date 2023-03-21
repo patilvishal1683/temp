@@ -1,3 +1,4 @@
+import sys
 import boto3
 import pprint
 import json
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     api_endpoint = f'https://api.github.com/repos/{OWNER}/{REPO_NAME}/issues'
     metadata = {
         "Content-Type": "application/json",
-        "Authorization": "token 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"
+        "Authorization": f"token {sys.argv[1]}"
     }
     all_issues = check_issue_already_present(metadata=metadata, url=api_endpoint)
 
