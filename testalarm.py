@@ -56,7 +56,7 @@ if __name__ == "__main__":
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         if response.get('MetricAlarms'):
             for alarm in response.get('MetricAlarms'):
-                pprint.pprint(alarm)
+                # pprint.pprint(alarm)
                 # if alarm.get('StateValue') != "ALARM":
                 #     continue
                 # if alarm.get('AlarmName') in all_issues:
@@ -64,7 +64,7 @@ if __name__ == "__main__":
                 # else:
                 issue_data = {
                     'title': alarm.get('AlarmName'),
-                    'body': alarm.get('AlarmArn'),
+                    'body': json.dumps(alarm, default=str),
                     'labels': "alarm"
                 }
                 issue_alarm.append(issue_data)
@@ -72,4 +72,5 @@ if __name__ == "__main__":
             logger.debug(f"No MetricAlarms alarms present it given aw account")
     else:
         logger.debug(f"An error occurred in get alarm from aws account")
+
     print(json.dumps(issue_alarm))
