@@ -25,7 +25,7 @@ jobs:
         run: |
           pip install boto3
           pip install requests
-          output=$(python3 testalarm.py)
+          output=$(python3 testalarm.py ${{ secrets.GH_TOKEN }})
           echo $output
           echo "alarm_data=$output" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
