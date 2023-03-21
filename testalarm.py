@@ -64,7 +64,7 @@ if __name__ == "__main__":
                 # else:
                 issue_data = {
                     'title': alarm.get('AlarmName'),
-                    'body': alarm,
+                    'body': alarm.get('AlarmArn'),
                     'labels': "alarm"
                 }
                 issue_alarm.append(issue_data)
@@ -72,4 +72,4 @@ if __name__ == "__main__":
             logger.debug(f"No MetricAlarms alarms present it given aw account")
     else:
         logger.debug(f"An error occurred in get alarm from aws account")
-    print(json.dumps(issue_alarm))
+    print(issue_alarm)
