@@ -15,8 +15,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: "AKIAU56HZVLTYON7ZMHT"
-          aws-secret-access-key: "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"
+          aws-access-key-id: ""
+          aws-secret-access-key: ""
           aws-region: us-east-1
           mask-aws-account-id: 'no'
       - name: cloneCode
