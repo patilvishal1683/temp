@@ -13,7 +13,7 @@ jobs:
           echo "alarm=[]" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
       - name: Test
-        if: ${{ steps.getAlarms.outputs.alarm_data != "[]" }}
+        if: steps.getAlarms.outputs.alarm_data != '[]' 
         run: |
           echo "Hi"
 
